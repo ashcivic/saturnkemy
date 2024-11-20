@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load form_filters %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Orçamentos</h1>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Formulário para adicionar itens -->
+  
+    <form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-3">
+        {{ form.produto.label_tag }}
+        {{ form.produto|add_class:"form-control" }}
+      </div>
+      <div class="col-md-2">
+        {{ form.quantidade.label_tag }}
+        {{ form.quantidade|add_class:"form-control" }}
+      </div>
+      <div class="col-md-2">
+        {{ form.valor_unitario.label_tag }}
+        {{ form.valor_unitario|add_class:"form-control" }}
+      </div>
+      <div class="col-md-2">
+        {{ form.desconto.label_tag }}
+        {{ form.desconto|add_class:"form-control" }}
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+      </div>
+    </div>
+      </form>
+
+      <!-- Tabela de itens do orçamento -->
+      <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Valor Unitário</th>
+        <th>Desconto</th>
+        <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if orcamento.itens.exists %}
+        {% for item in orcamento.itens.all %}
+        <tr>
+          <td>{{ item.produto.nome }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>R$ {{ item.valor_unitario|floatformat:2 }}</td>
+          <td>R$ {{ item.desconto|floatformat:2 }}</td>
+          <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="5" class="text-center">Nenhum item adicionado ao orçamento.</td>
+        </tr>
+      {% endif %}
+      </tbody>
+      </table>
+
+  <!-- Total e botão de finalizar venda -->
+  <div class="mt-3">
+    <h2>Total: R$ {{ orcamento.valor_total|floatformat:2 }}</h2>
+    {% if orcamento.id %}
+      <a href="{% url 'orcamentos:finalizar_venda' orcamento.id %}" class="btn btn-success">
+        Finalizar Venda
+      </a>
+    {% else %}
+      <p class="text-warning">Não é possível finalizar o orçamento. Verifique se há itens adicionados.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

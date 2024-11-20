@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1>Orçamentos</h1>
+  <a href="{% url 'manipulacao:novo_orcamento' %}" class="btn btn-primary mb-3">Novo Orçamento</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Status</th>
+        <th>Usuário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for orcamento in orcamentos %}
+      <tr>
+        <td>{{ orcamento.id }}</td>
+        <td>{{ orcamento.data_criacao }}</td>
+        <td>{{ orcamento.get_status_display }}</td>
+        <td>{{ orcamento.usuario.username }}</td>
+        <td>
+          <a href="{% url 'manipulacao:editar_orcamento' orcamento.id %}" class="btn btn-warning">Editar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

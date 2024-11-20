@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+      <div class="mb-4">
+          {% include "./includes/breadcrumb.html" %}
+          <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Módulo SNGPC</h1>
+          <p>
+            Ambiente:
+            <span class="font-semibold text-sm" 
+                  :class="config.ambiente === 'producao' ? 'text-green-600' : 'text-red-600'">
+              {{ config.ambiente|title }}
+            </span>
+          </p>
+        </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="p-4 bg-gray-50 rounded-lg shadow-md mt-4">
+    <h2 class="font-semibold text-lg mb-3">Adicionar Medicamento</h2>
+    <form @submit.prevent="adicionarMedicamento">
+      {% csrf_token %}
+      <!-- Dropdown para seleção de medicamento -->
+      <div class="mb-4">
+        <label for="medicamento" class="block text-sm font-medium text-gray-700">Medicamento:</label>
+        <select id="medicamento" name="medicamento" x-model="novoMedicamento.nome"
+                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm">
+          <option value="">Selecione o medicamento...</option>
+          <template x-for="med in medicamentos">
+            <option :value="med.id" x-text="med.nome"></option>
+          </template>
+        </select>
+      </div>
+
+      <!-- Campos adicionais exibidos dinamicamente -->
+      <template x-if="novoMedicamento.nome">
+        <div class="mb-4">
+          <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade:</label>
+          <input type="number" id="quantidade" name="quantidade" x-model="novoMedicamento.quantidade"
+                 class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                 placeholder="Digite a quantidade">
+        </div>
+        <div class="mb-4">
+          <label for="lote" class="block text-sm font-medium text-gray-700">Lote:</label>
+          <input type="text" id="lote" name="lote" x-model="novoMedicamento.lote"
+                 class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                 placeholder="Digite o lote">
+        </div>
+        <!-- Adicionar mais campos conforme necessário -->
+      </template>
+
+      <!-- Botão para adicionar medicamento -->
+      <div class="flex justify-end">
+        <button type="submit" 
+                class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-4 py-2">
+          Adicionar Medicamento
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de medicamentos adicionados -->
+  <div class="p-4 bg-white rounded-lg shadow-md mt-4">
+    <h2 class="font-semibold text-lg">Medicamentos Adicionados</h2>
+    <table class="min-w-full divide-y divide-gray-200 mt-4">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Medicamento</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantidade</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Lote</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ação</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <template x-for="med in medicamentosAdicionados" :key="med.id">
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" x-text="med.nome"></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="med.quantidade"></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="med.lote"></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <button @click="removerMedicamento(med)" 
+                      class="text-red-600 hover:text-red-900">Remover</button>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Botão para gerar e enviar XML -->
+  <div class="flex justify-end mt-4">
+    <button @click="gerarEnviarXML"
+            class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-4 py-2">
+      Gerar e Enviar XML
+    </button>
+  </div>
+
+  <!-- Status -->
+  <div class="p-4 bg-gray-50 rounded-lg shadow-md mt-4" x-show="status">
+    <h2 class="font-semibold text-lg">Status</h2>
+    <div class="mt-2">
+      <p><strong>Status da Operação:</strong> <span x-text="status"></span></p>
+      <h3 class="font-semibold mt-4">Resposta</h3>
+      <pre class="bg-gray-100 p-4 rounded-md overflow-auto">{{ resposta }}</pre>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('sngpcPanel', () => ({
+      config: {
+        ambiente: '{{ config.ambiente }}',
+      },
+      medicamentos: [],  // Preencher com dados dinâmicos via API ou contexto Django
+      medicamentosAdicionados: [],
+      novoMedicamento: {
+        nome: '',
+        quantidade: '',
+        lote: '',
+      },
+      status: '',
+      resposta: '',
+      adicionarMedicamento() {
+        this.medicamentosAdicionados.push({...this.novoMedicamento});
+        this.novoMedicamento = { nome: '', quantidade: '', lote: '' };
+      },
+      removerMedicamento(medicamento) {
+        this.medicamentosAdicionados = this.medicamentosAdicionados.filter(m => m !== medicamento);
+      },
+      gerarEnviarXML() {
+        console.log('Gerando e enviando XML...', this.medicamentosAdicionados);
+        // Simular resposta
+        this.status = 'XML enviado com sucesso!';
+        this.resposta = 'Simulação de resposta da ANVISA.';
+      },
+    }));
+  });
+</script>
+{% endblock js %}

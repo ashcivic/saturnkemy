@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="p-4 bg-white shadow rounded-lg">
+    <h2 class="text-lg font-semibold text-gray-800">Adicionar Item ao Orçamento</h2>
+
+    <form id="adicionar-item-form" method="post">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
+            <div>
+                <label for="produto" class="block text-sm font-medium text-gray-700">Produto</label>
+                <select id="produto" name="produto" class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
+                    {% for produto in produtos %}
+                    <option value="{{ produto.id }}">{{ produto.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
+                <input type="number" id="quantidade" name="quantidade" class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
+            </div>
+
+            <div>
+                <label for="valor" class="block text-sm font-medium text-gray-700">Valor Unitário</label>
+                <input type="text" id="valor" name="valor" class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
+            </div>
+
+            <div>
+                <label for="desconto" class="block text-sm font-medium text-gray-700">Desconto (%)</label>
+                <input type="number" id="desconto" name="desconto" class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
+            </div>
+        </div>
+
+        <button type="submit" class="mt-4 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Adicionar ao Orçamento
+        </button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+  document.getElementById('adicionar-item-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch("{% url 'drogaria:adicionar_item' %}", {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+      }
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message || 'Item adicionado com sucesso!'))
+    .catch(error => console.error('Erro:', error));
+  });
+</script>
+{% endblock js %}

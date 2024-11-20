@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1>Relatórios</h1>
+  <ul class="list-group">
+    {% for relatorio in relatorios %}
+    <li class="list-group-item">
+      <a href="{{ relatorio.url }}">{{ relatorio.titulo }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
