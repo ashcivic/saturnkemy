@@ -1,0 +1,20 @@
+<!-- cadastros/templates/cadastros/representante/representante_list.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Representantes</title>
+</head>
+<body>
+    <h1>Representantes Cadastrados</h1>
+    <a href="{% url 'cadastros:representante_create' %}">Novo Representante</a>
+    <ul>
+        {% for representante in representantes %}
+            <li>
+                {{ representante.nome }} - {{ representante.cliente }} 
+                <a href="{% url 'cadastros:representante_edit' representante.id %}">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

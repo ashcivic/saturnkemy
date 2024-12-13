@@ -1,0 +1,7 @@
+<!-- notas_fiscais/templates/notas_fiscais/nfe/nfe_form.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="pedido_id">Pedido ID:</label>
+    <input type="text" name="pedido_id" required>
+    <button type="submit">Emitir NFE</button>
+</form>

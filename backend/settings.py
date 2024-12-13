@@ -60,6 +60,13 @@ INSTALLED_APPS = [
     'backend.sngpc',
     'backend.drogaria',
     'backend.manipulacao',
+    'backend.entregas',
+    'backend.gestao_estoque',
+    'backend.financeiro',
+    'backend.notas_fiscais',
+    'backend.cadastros',
+    'backend.gestor',
+    'backend.frente_de_caixa',
 ]
 
 
@@ -115,7 +122,7 @@ DATABASES = {
 }
 
 # Configuração de emails
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
 EMAIL_HOST = config('EMAIL_HOST', 'localhost')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
@@ -153,7 +160,7 @@ DECIMAL_SEPARATOR = ','
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Configuração padrão de chaves primárias
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,0 +1,29 @@
+<!-- notas_fiscais/templates/notas_fiscais/configuracoes/configuracoes_form.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações</title>
+</head>
+<body>
+    <h1>Configurações</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="certificado">Certificado Digital:</label>
+        <input type="file" name="certificado" required>
+        <br>
+        <label for="senha">Senha do Certificado:</label>
+        <input type="password" name="senha" required>
+        <br>
+        <label for="ambiente">Ambiente:</label>
+        <select name="ambiente">
+            <option value="homologacao">Homologação</option>
+            <option value="producao">Produção</option>
+        </select>
+        <br>
+        <button type="submit">Salvar Configurações</button>
+    </form>
+    <a href="{% url 'notas_fiscais:nfe_create' %}">Emitir NFE</a>
+    <a href="{% url 'notas_fiscais:nfse_create' %}">Emitir NFSe</a>
+</body>
+</html>

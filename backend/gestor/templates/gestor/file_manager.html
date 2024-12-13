@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Gerenciador de Arquivos</h1>
+        </div>
+    </div>
+</div>
+
+<!-- Formulário de upload -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <button type="submit">Fazer Upload</button>
+</form>
+
+{% if uploaded_file_url %}
+    <p>Arquivo carregado com sucesso: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+{% endif %}
+
+<!-- Exibe lista de arquivos na pasta media -->
+<h2>Arquivos carregados:</h2>
+<ul>
+    {% for file in uploaded_files %}
+        <li><a href="{{ MEDIA_URL }}{{ file }}">{{ file }}</a></li>
+    {% endfor %}
+</ul>
+
+
+    {% endblock %}

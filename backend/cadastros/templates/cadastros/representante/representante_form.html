@@ -1,0 +1,47 @@
+<!-- cadastros/templates/cadastros/representante/representante_form.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Representante</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Representante</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cliente">Cliente:</label>
+        <select name="cliente" required>
+            <!-- Assuming you pass the list of clients as 'clientes' -->
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.nome_fantasia }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="data_pagamento">Data de Pagamento:</label>
+        <input type="date" name="data_pagamento" required>
+        <br>
+        <label for="forma_pagamento">Forma de Pagamento:</label>
+        <select name="forma_pagamento" required>
+            <option value="cartao">Cartão</option>
+            <option value="boleto">Boleto</option>
+            <option value="cheque">Cheque</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+        </select>
+        <br>
+        <label for="percentual_pago">Percentual Pago (%):</label>
+        <input type="number" name="percentual_pago" required>
+        <br>
+        <label for="status">Status:</label>
+        <select name="status" required>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+            <option value="cancelado">Cancelado</option>
+            <option value="bloqueado">Bloqueado</option>
+        </select>
+        <br>
+        <button type="submit">Salvar Representante</button>
+    </form>
+    <a href="{% url 'cadastros:representante_list' %}">Voltar</a>
+</body>
+</html>

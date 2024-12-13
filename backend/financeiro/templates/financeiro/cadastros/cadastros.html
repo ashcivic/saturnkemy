@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Cadastros</h1>
+        </div>
+    </div>
+</div>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Adicionar Conta Bancária</button>
+</form>
+<table>
+    <tr>
+        <th>Banco</th>
+        <th>Agência</th>
+        <th>Conta</th>
+        <th>Tipo</th>
+    </tr>
+    {% for conta in contas_bancarias %}
+    <tr>
+        <td>{{ conta.banco }}</td>
+        <td>{{ conta.agencia }}</td>
+        <td>{{ conta.conta }}</td>
+        <td>{{ conta.tipo }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

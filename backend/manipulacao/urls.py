@@ -23,6 +23,10 @@ urlpatterns = [
     path('relatorios/', views.relatorios_index, name='relatorios_index'),
     
     # Configurações
+    path('configuracoes/', views.configuracoes_index, name='configuracoes_index'),
     path('configuracoes/usuario/', views.configurar_usuario, name='configurar_usuario'),
+
+    # Compras
+    path('compras/', views.compras_index, name='compras_index'),
 
 ]

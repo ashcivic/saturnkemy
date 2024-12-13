@@ -1,0 +1,20 @@
+<!-- cadastros/templates/cadastros/convenios/convenio_list.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Convênios</title>
+</head>
+<body>
+    <h1>Convênios Cadastrados</h1>
+    <a href="{% url 'cadastros:convenio_create' %}">Novo Convênio</a>
+    <ul>
+        {% for convenio in convenios %}
+            <li>
+                {{ convenio.nome }} - {{ convenio.data_cobranca }} 
+                <a href="{% url 'cadastros:convenio_edit' convenio.id %}">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

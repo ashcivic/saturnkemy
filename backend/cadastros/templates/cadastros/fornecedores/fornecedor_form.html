@@ -1,0 +1,43 @@
+<!-- cadastros/templates/cadastros/fornecedores/fornecedor_form.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Fornecedor</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Fornecedor</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="documento_tipo">Tipo de Documento:</label>
+        <select name="documento_tipo" required>
+            <option value="CNPJ">CNPJ</option>
+            <option value="CPF">CPF</option>
+        </select>
+        <br>
+        <label for="numero_documento">Número do Documento:</label>
+        <input type="text" name="numero_documento" placeholder="12.345.678/0001-90" required>
+        <br>
+        <label for="valor_credito_limite">Valor de Crédito Limite:</label>
+        <input type="number" name="valor_credito_limite" step="0.01" required>
+        <br>
+        <label for="observacoes">Observações:</label>
+        <textarea name="observacoes"></textarea>
+        <br>
+        <label for="data_pagamento">Data para Pagamentos:</label>
+        <input type="date" name="data_pagamento" required>
+        <br>
+        <label for="tipos_pagamento">Tipos de Pagamentos Aceitos:</label>
+        <select name="tipos_pagamento" required>
+            <option value="cartao">Cartão</option>
+            <option value="boleto">Boleto</option>
+            <option value="cheque">Cheque</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+        </select>
+        <br>
+        <button type="submit">Salvar Fornecedor</button>
+    </form>
+    <a href="{% url 'cadastros:fornecedor_list' %}">Voltar</a>
+</body>
+</html>

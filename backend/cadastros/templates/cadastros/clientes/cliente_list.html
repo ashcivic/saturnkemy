@@ -1,0 +1,17 @@
+<!-- cadastros/templates/cadastros/clientes/cliente_list.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <h1>Clientes Cadastrados</h1>
+    <a href="{% url 'cadastros:cliente_create' %}">Novo Cliente</a>
+    <ul>
+        {% for cliente in clientes %}
+            <li>{{ cliente.nome_fantasia }} - {{ cliente.numero_documento }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

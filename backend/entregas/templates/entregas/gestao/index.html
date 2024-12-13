@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delivery Management</h1>
+
+<form method="GET">
+    <label for="date">Filter by Date:</label>
+    <input type="date" name="date" value="{{ filter_date }}">
+    <button type="submit">Filter</button>
+</form>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Delivery</button>
+</form>
+
+<h2>Today's Deliveries</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order</th>
+            <th>Address</th>
+            <th>Responsible</th>
+            <th>Observation</th>
+            <th>Driver</th>
+            <th>Delivery Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for delivery in deliveries %}
+        <tr>
+            <td>{{ delivery.order }}</td>
+            <td>{{ delivery.address }}</td>
+            <td>{{ delivery.responsible }}</td>
+            <td>{{ delivery.observation }}</td>
+            <td>{{ delivery.driver.username }}</td>
+            <td>{{ delivery.delivery_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No deliveries found for this date.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

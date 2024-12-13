@@ -1,0 +1,20 @@
+<!-- notas_fiscais/templates/notas_fiscais/nfse/nfse_form.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Emitir NFSe</title>
+</head>
+<body>
+    <h1>Emitir NFSe</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="formula_id">ID da Fórmula:</label>
+        <input type="text" name="formula_id" required>
+        <br>
+        <!-- Add more fields as needed for NFSe -->
+        <button type="submit">Emitir NFSe</button>
+    </form>
+    <a href="{% url 'notas_fiscais:configuracoes' %}">Configurações</a>
+</body>
+</html>

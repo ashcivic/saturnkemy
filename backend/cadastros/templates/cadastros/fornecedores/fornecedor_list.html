@@ -1,0 +1,20 @@
+<!-- cadastros/templates/cadastros/fornecedores/fornecedor_list.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Fornecedores</title>
+</head>
+<body>
+    <h1>Fornecedores Cadastrados</h1>
+    <a href="{% url 'cadastros:fornecedor_create' %}">Novo Fornecedor</a>
+    <ul>
+        {% for fornecedor in fornecedores %}
+            <li>
+                {{ fornecedor.nome }} - {{ fornecedor.numero_documento }} 
+                <a href="{% url 'cadastros:fornecedor_edit' fornecedor.id %}">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

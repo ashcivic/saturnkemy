@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Produtos</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Código Interno</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.codigo_interno }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>{{ produto.valor }}</td>
+            <td>
+                <a href="{% url 'editar_produto' produto.pk %}">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'cadastrar_produto' %}">Cadastrar novo produto</a>
+<a href="{% url 'exportar_produtos' %}">Exportar Planilha</a>
+<a href="{% url 'importar_produtos' %}">Importar Planilha</a>
+{% endblock %}

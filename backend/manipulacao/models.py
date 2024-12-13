@@ -70,8 +70,9 @@ class Orcamento(models.Model):
 
 # Classe de Item de Fórmula
 class ItemFormula(models.Model):
-    formula = models.ForeignKey(Orcamento, on_delete=models.CASCADE, related_name='itens')
-    materia_prima = models.ForeignKey('MateriaPrima', on_delete=models.CASCADE)
+    formula = models.ForeignKey(Formula, on_delete=models.CASCADE, related_name='formula_itens')
+    Orcamento = models.ForeignKey(Orcamento, on_delete=models.CASCADE, related_name='formula_itens')
+    materia_prima = models.ForeignKey(MateriaPrima, on_delete=models.CASCADE)
     quantidade = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):

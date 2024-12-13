@@ -37,9 +37,9 @@ class ItemFormulaForm(forms.ModelForm):
 class OrcamentoForm(forms.ModelForm):
     class Meta:
         model = Orcamento
-        fields = ['usuario', 'status', 'cliente']
+        fields = ['status', 'cliente']
         widgets = {
-            'usuario': forms.Select(attrs={'class': 'form-control'}),
+            #'usuario': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'cliente': forms.TextInput(attrs={'class': 'form-control'}),
         }
@@ -60,7 +60,7 @@ class ItemOrcamentoForm(forms.ModelForm):
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ['usuario', 'status', 'ultima_atualizacao']
+        fields = ['usuario', 'status']
         widgets = {
             'usuario': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),

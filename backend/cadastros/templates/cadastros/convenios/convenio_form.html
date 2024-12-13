@@ -1,0 +1,54 @@
+<!-- cadastros/templates/cadastros/convenios/convenio_form.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Convênio</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Convênio</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cliente">Cliente:</label>
+        <select name="cliente" required>
+            <!-- Assuming you pass the list of clients as 'clientes' -->
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.nome_fantasia }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="data_cobranca">Data de Cobrança:</label>
+        <input type="date" name="data_cobranca" required>
+        <br>
+        <label for="valor_credito">Valor de Crédito:</label>
+        <input type="number" name="valor_credito" step="0.01" required>
+        <br>
+        <label for="tipo_cobranca">Tipo de Cobrança:</label>
+        <select name="tipo_cobranca" required>
+            <option value="cartao">Cartão</option>
+            <option value="boleto">Boleto</option>
+            <option value="cheque">Cheque</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+        </select>
+        <br>
+        <label for="margem">Margem (%):</label>
+        <input type="number" name="margem" required>
+        <br>
+        <label for="tipo_convenio">Tipo de Convênio:</label>
+        <select name="tipo_convenio" required>
+            <option value="farmacia">Farmácia</option>
+            <option value="empresa">Empresa</option>
+            <option value="escola">Escola</option>
+            <option value="funcionario">Funcionário</option>
+            <option value="governamental">Governamental</option>
+            <option value="clinica">Clínica</option>
+            <option value="medico">Médico</option>
+            <option value="representante">Representante</option>
+        </select>
+        <br>
+        <button type="submit">Salvar Convênio</button>
+    </form>
+    <a href="{% url 'cadastros:convenio_list' %}">Voltar</a>
+</body>
+</html>

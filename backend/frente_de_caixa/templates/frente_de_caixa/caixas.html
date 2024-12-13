@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Caixas</h1>
+        </div>
+    </div>
+</div>
+
+<h1>Gestão de Caixas</h1>
+<table>
+    <tr>
+        <th>Caixa</th>
+        <th>Operador</th>
+        <th>Total de Vendas</th>
+        <th>Status</th>
+    </tr>
+    {% for caixa in caixas %}
+    <tr>
+        <td>{{ caixa.id }}</td>
+        <td>{{ caixa.operador.username }}</td>
+        <td>{{ caixa.total_vendas }}</td>
+        <td>{{ caixa.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

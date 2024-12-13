@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+  <div class="mb-1 w-full">
+      <div class="mb-4">
+          {% include "./includes/breadcrumb.html" %}
+          <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Compras</h1>
+      </div>
+  </div>
+</div>
 <div class="container mt-4">
-  <h1>Compras</h1>
   <a href="#" class="btn btn-primary mb-3">Novo Pedido</a>
   <table class="table table-striped">
     <thead>
