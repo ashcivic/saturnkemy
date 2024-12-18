@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Backups</h1>
+        </div>
+    </div>
+</div>
+
+
+    <h1>Gerenciar Backups</h1>
+    <a href="{% url 'adminas:criar_backup' %}?tipo=parcial">Backup Parcial</a>
+    <a href="{% url 'adminas:criar_backup' %}?tipo=total">Backup Total</a>
+    <h2>Histórico de Backups</h2>
+    <ul>
+        {% for backup in backups %}
+            <li>
+                {{ backup.tipo }} - {{ backup.data_criacao }} - 
+                {% if backup.completo %} Completo {% else %} Incompleto {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

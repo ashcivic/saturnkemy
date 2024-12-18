@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <h1 class="text-2xl font-bold mb-4">Dashboard - Saturnkemy</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Gráfico de Contas -->
+        <div class="bg-white p-4 shadow rounded">
+            <h2 class="text-xl font-semibold mb-2">Contas a Pagar e Receber</h2>
+            <canvas id="chartContas"></canvas>
+        </div>
+        <!-- Gráfico de Vendas -->
+        <div class="bg-white p-4 shadow rounded">
+            <h2 class="text-xl font-semibold mb-2">Vendas por Mês</h2>
+            <canvas id="chartVendas"></canvas>
+        </div>
+        <!-- Gráfico de Custos -->
+        <div class="bg-white p-4 shadow rounded">
+            <h2 class="text-xl font-semibold mb-2">Custos com Entregas</h2>
+            <canvas id="chartEntregas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const data = JSON.parse('{{ data|safe }}');
+
+        // Gráfico Contas
+        new Chart(document.getElementById('chartContas'), {
+            type: 'doughnut',
+            data: {
+                labels: data.contas.labels,
+                datasets: [{ data: data.contas.data, backgroundColor: ['#FF6384', '#36A2EB'] }]
+            }
+        });
+
+        // Gráfico Vendas
+        new Chart(document.getElementById('chartVendas'), {
+            type: 'bar',
+            data: {
+                labels: data.vendas.labels,
+                datasets: [{ data: data.vendas.data, backgroundColor: '#36A2EB' }]
+            }
+        });
+
+        // Gráfico Custos
+        new Chart(document.getElementById('chartEntregas'), {
+            type: 'pie',
+            data: {
+                labels: ['Custos Totais'],
+                datasets: [{ data: [data.entregas], backgroundColor: ['#FF6384'] }]
+            }
+        });
+    </script>
+</body>
+</html>

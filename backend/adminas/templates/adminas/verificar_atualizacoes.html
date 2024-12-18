@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificar Atualizações</title>
+</head>
+<body>
+    <h1>Verificar Atualizações</h1>
+    <p>Status atual do sistema: {{ status_sistema }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Verificar Atualizações</button>
+    </form>
+</body>
+</html>

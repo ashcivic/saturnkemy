@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurar Permissão</title>
+</head>
+<body>
+    <h1>Configurar Permissões</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="usuario">Usuário:</label>
+        <select id="usuario" name="usuario">
+            {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="permissoes">Permissões:</label>
+        <select id="permissoes" name="permissoes" multiple>
+            {% for permissao in permissoes %}
+                <option value="{{ permissao.id }}">{{ permissao.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Salvar Permissões</button>
+    </form>
+</body>
+</html>

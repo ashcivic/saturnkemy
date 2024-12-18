@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Lista de post-its</h1>
+        </div>
+    </div>
+</div>
+
+    <a href="{% url 'postit:adicionar_postit' %}">Adicionar Novo Post-it</a>
+    <ul>
+        {% for postit in postits %}
+        <li style="background-color: {% if postit.cor %}{{ postit.cor }}{% else %}#FFFFFF{% endif %};">
+                <strong>{{ postit.titulo }}</strong>
+                <p>{{ postit.conteudo }}</p>
+                <a href="{% url 'postit:editar_postit' postit.id %}">Editar</a> | 
+                <a href="{% url 'postit:excluir_postit' postit.id %}">Excluir</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endblock %}

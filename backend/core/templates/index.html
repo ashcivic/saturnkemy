@@ -1,7 +1,7 @@
 <!-- index.html -->
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,14 +25,16 @@
     <div class="container mx-auto p-5">
       <div class="md:flex md:flex-row md:justify-between text-center text-sm sm:text-base">
         <div class="flex flex-row justify-center">
-          <div class="bg-gradient-to-r from-purple-400 to-red-400 w-10 h-10 rounded-lg"></div>
-          <!-- <div>
-            <img src="https://demo.themesberg.com/windster/images/logo.svg" alt="">
-          </div> -->
-          <h1 class="text-3xl text-gray-600 ml-2">Dicas de Django</h1>
+          <div class="bg-gradient-to-r from-purple-400 to-red-400 w-10 h-10 rounded-lg">
+            
+          </div>
+          <div>
+            <img src="./includes/logobio.jpeg" alt="">
+          </div> 
+          <h1 class="text-3xl text-gray-600 ml-2">BIO Pharma Suplementos Alimentares</h1>
         </div>
         <div class="mt-2">
-          <a href="{% url 'core:dashboard' %}" class="text-gray-600 hover:text-purple-600 p-4 px-3 sm:px-4">Home</a>
+          <a href="{% url 'dashboard:dashboard' %}" class="text-gray-600 hover:text-purple-600 p-4 px-3 sm:px-4">Home</a>
           <a href="#products" class="text-gray-600 hover:text-purple-600 p-4 px-3 sm:px-4">Produtos</a>
           <a href="#contato" class="text-gray-600 hover:text-purple-600 p-4 px-3 sm:px-4">Contato</a>
           <a href="{% url 'login' %}" class="text-gray-600 hover:text-purple-600 p-4 px-3 sm:px-4">Login</a>
@@ -48,7 +50,7 @@
       <div class="md:flex md:flex-row mt-20">
         <div class="md:w-2/5 flex flex-col justify-center items-center">
           <h2 class="font-serif text-5xl text-gray-600 mb-4 text-center md:self-start md:text-left">Grandes Marcas</h2>
-          <p class="uppercase text-gray-600 tracking-wide text-center md:self-start md:text-left">Confira as novas tendências.</p>
+          <p class="uppercase text-gray-600 tracking-wide text-center md:self-start md:text-left">Confira nossos Suplementos</p>
           <a href="#" class="bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-4 px-8 text-gray-50 uppercase text-xl md:self-start my-5">Compre agora</a>
         </div>
         <div class="md:w-3/5">
@@ -58,7 +60,7 @@
 
       <div id="products" class="my-20">
         <div class="flex flex-row justify-between my-5">
-          <h2 class="text-3xl">Coleção Masculina</h2>
+          <h2 class="text-3xl">Suplementos exclusivos</h2>
           <a href="#" class="flex flex-row text-lg hover:text-purple-700">
             Ver Todos
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +74,7 @@
               <img src="{% static 'img/products/men/product1.jpg' %}" class="rounded-tl-lg rounded-tr-lg" />
             </a>
             <div class="p-5">
-              <h3><a href="#">Mens T-Shirt</a></h3>
+              <h3><a href="#">Suplementos para O dia-a-dia</a></h3>
               <div class="flex flex-row my-3">
                 <div class="bg-black rounded-full h-5 w-5 shadow-md mr-2"></div>
                 <div class="bg-blue-800 rounded-full h-5 w-5 shadow-md mr-2"></div>

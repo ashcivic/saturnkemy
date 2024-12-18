@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">SNGPC</h1>
+        </div>
+    </div>
+</div>
+
+   
+<h1>Envio de Dados - SNGPC</h1>
+
+    <div>
+        <h3>Ambiente Atual: 
+            {% if ambiente == "producao" %}
+                <span style="color: green;">Produção</span> 🟢
+            {% else %}
+                <span style="color: red;">Homologação</span> 🔴
+            {% endif %}
+        </h3>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="codigo_barras">Código de Barras:</label>
+        <input 
+            type="text" 
+            name="codigo_barras" 
+            id="codigo_barras" 
+            onkeyup="buscarProdutos(this.value)" 
+            autocomplete="off"
+        >
+        <ul id="sugestoes" class="dropdown-content"></ul>
+    
+        <label for="nome_produto">Nome do Produto:</label>
+        <input type="text" name="nome_produto" id="nome_produto">
+    
+        <label for="quantidade">Quantidade:</label>
+        <input type="text" name="quantidade" id="quantidade">
+    
+        <label for="lote">Lote:</label>
+        <input type="text" name="lote" id="lote"><br><br>
+    
+        <button type="submit">Processar XML</button>
+    </form>
+    
+    <style>
+        .dropdown-content {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 250px;
+            display: none; /* Inicia invisível */
+        }
+        .dropdown-content li {
+            padding: 8px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .dropdown-content li:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-content.show {
+            display: block;
+        }
+    </style>
+    
+    
+
+    <div id="mensagens_retorno">
+        <h3>Mensagens de Retorno</h3>
+        {% if mensagens %}
+            <ul>
+                {% for mensagem in mensagens %}
+                    <li>{{ mensagem }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhuma mensagem retornada.</p>
+        {% endif %}
+    </div>
+
+    <button onclick="window.print()">Imprimir Comprovante</button>
+
+    <ul id="sugestoes">
+        <!-- Sugestões aparecerão aqui -->
+    </ul>
+    <script>
+        function buscarProdutos(query) {
+    if (query.length < 3) {
+        $("#sugestoes").removeClass("show").empty(); // Oculta e limpa sugestões se o texto for muito curto
+        return;
+    }
+
+    $.ajax({
+        url: "{% url 'sngpc:buscar_produtos' %}",
+        method: "GET",
+        data: { q: query },
+        success: function (data) {
+            const sugestoes = $("#sugestoes");
+            sugestoes.empty().addClass("show"); // Mostra o dropdown
+            data.forEach((produto) => {
+                sugestoes.append(
+                    `<li onclick='selecionarProduto(${JSON.stringify(
+                        produto
+                    )})'>${produto.nome} - ${produto.codigo_barras}</li>`
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Erro na requisição AJAX:", error);
+        },
+    });
+}
+
+function selecionarProduto(produto) {
+    // Preenche os campos com os dados do produto
+    $("#codigo_barras").val(produto.codigo_barras);
+    $("#nome_produto").val(produto.nome);
+    $("#quantidade").val(produto.quantidade || ""); // Adicione os campos necessários
+    $("#lote").val(produto.lote || ""); // Adicione os campos necessários
+    $("#sugestoes").removeClass("show").empty(); // Oculta e limpa o dropdown
+}
+    </script>
+    
+    
+{% endblock %}

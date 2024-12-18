@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Backup</title>
+</head>
+<body>
+    <h1>Criar Backup</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="tipo">Tipo de Backup:</label>
+        <select id="tipo" name="tipo">
+            <option value="parcial">Parcial</option>
+            <option value="total">Total</option>
+        </select>
+
+        <button type="submit">Executar Backup</button>
+    </form>
+</body>
+</html>

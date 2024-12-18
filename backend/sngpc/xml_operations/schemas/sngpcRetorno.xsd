@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  @Versao: 2.6
+  @Data: 2013-07-02
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:sngpc="urn:sngpc-schema"
+    targetNamespace="urn:sngpc-schema" elementFormDefault="qualified">
+  <include schemaLocation="sngpcSimpleTypes.xsd" />
+  <include schemaLocation="sngpcComplexTypes.xsd" />
+  <!-- Definicao da mensagem -->
+  <element name="mensagemRetornoSNGPC">
+    <complexType>
+      <sequence>
+        <element name="retorno" type="sngpc:ct_Retorno" minOccurs="0" maxOccurs="5" />
+      </sequence>
+    </complexType>
+  </element>
+</schema>
+
+

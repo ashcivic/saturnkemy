@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Adicionar Post-it</h1>
+        </div>
+    </div>
+</div>
+<!-- templates/postits/adicionar.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo">
+    <label for="conteudo">Conteúdo:</label>
+    <textarea id="conteudo" name="conteudo"></textarea>
+    <label for="cor">Cor:</label>
+    <input type="color" id="cor" name="cor" value="#FFFF00">
+    <button type="submit">Adicionar</button>
+</form>
+
+{% endblock %}

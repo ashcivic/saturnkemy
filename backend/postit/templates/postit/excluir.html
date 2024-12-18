@@ -1,0 +1,7 @@
+<!-- templates/postits/excluir.html -->
+<p>Tem certeza que deseja excluir o post-it "{{ postit.titulo }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Excluir</button>
+    <a href="{% url 'postits' %}">Cancelar</a>
+</form>

@@ -22,7 +22,13 @@ urlpatterns = [
     path('gestao_estoque/', include('backend.gestao_estoque.urls', namespace='gestao_estoque')), # noqa E501
     path('entregas/', include('backend.entregas.urls', namespace='entregas')), # noqa E501
     path('gestor/', include('backend.gestor.urls', namespace='gestor')), # noqa E501
-    path('frente_de_caixa/', include('backend.frente_de_caixa.urls', namespace='frente_de_caixa')) # noqae501
+    path('frente_de_caixa/', include('backend.frente_de_caixa.urls', namespace='frente_de_caixa')), # noqa E501
+    path('ecommerce/', include('backend.ecommerce.urls', namespace='ecommerce')), # noqa E501
+    path('adminas/', include('backend.adminas.urls', namespace='adminas')), # noqa E501
+    path('tarefas/', include('backend.tarefas.urls', namespace='tarefas')), # noqa E501
+    path('postit/', include('backend.postit.urls', namespace='postit')), # noqa E501
+    path('dashboard/', include('backend.dashboard.urls', namespace='dashboard')), # noqa E501
+
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Adicionando URLs de media

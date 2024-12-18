@@ -1,0 +1,15 @@
+<!-- templates/tarefas/listar.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tarefas</title>
+</head>
+<body>
+    <h1>Tarefas</h1>
+    <ul>
+        {% for tarefa in tarefas %}
+            <li>{{ tarefa.titulo }} - {{ tarefa.descricao }} - {{ tarefa.data_limite }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

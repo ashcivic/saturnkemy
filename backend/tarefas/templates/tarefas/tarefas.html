@@ -1,0 +1,12 @@
+<!-- templates/tarefas/tarefas.html -->
+<h2>Tarefas</h2>
+<a href="{% url 'tarefas:adicionar_tarefa' %}">Adicionar Tarefa</a>
+<ul>
+    {% for tarefa in tarefas %}
+        <li>
+            {{ tarefa.titulo }} - {{ tarefa.status }}
+            <a href="{% url 'tarefas:editar_tarefa' tarefa.id %}">Editar</a>
+            <a href="{% url 'tarefas:excluir_tarefa' tarefa.id %}">Excluir</a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,29 +1,34 @@
 <!-- notas_fiscais/templates/notas_fiscais/configuracoes/configuracoes_form.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Configurações</title>
-</head>
-<body>
-    <h1>Configurações</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="certificado">Certificado Digital:</label>
-        <input type="file" name="certificado" required>
-        <br>
-        <label for="senha">Senha do Certificado:</label>
-        <input type="password" name="senha" required>
-        <br>
-        <label for="ambiente">Ambiente:</label>
-        <select name="ambiente">
-            <option value="homologacao">Homologação</option>
-            <option value="producao">Produção</option>
-        </select>
-        <br>
-        <button type="submit">Salvar Configurações</button>
-    </form>
-    <a href="{% url 'notas_fiscais:nfe_create' %}">Emitir NFE</a>
-    <a href="{% url 'notas_fiscais:nfse_create' %}">Emitir NFSe</a>
-</body>
-</html>
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            {% include "./includes/breadcrumb.html" %}
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Configurações</h1>
+        </div>
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="certificado">Certificado Digital:</label>
+    <input type="file" name="certificado" required>
+    <br>
+    <label for="senha">Senha do Certificado:</label>
+    <input type="password" name="senha" required>
+    <br>
+    <label for="ambiente">Ambiente:</label>
+    <select name="ambiente">
+        <option value="homologacao">Homologação</option>
+        <option value="producao">Produção</option>
+    </select>
+    <br>
+    <button type="submit">Salvar Configurações</button>
+</form>
+<a href="{% url 'notas_fiscais:nfe_create' %}">Emitir NFE</a>
+<a href="{% url 'notas_fiscais:nfse_create' %}">Emitir NFSe</a>
+
+{% endblock %}

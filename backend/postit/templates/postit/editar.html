@@ -1,0 +1,11 @@
+<!-- templates/postits/editar.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" value="{{ postit.titulo }}">
+    <label for="conteudo">Conteúdo:</label>
+    <textarea id="conteudo" name="conteudo">{{ postit.conteudo }}</textarea>
+    <label for="cor">Cor:</label>
+    <input type="color" id="cor" name="cor" value="{{ postit.cor }}">
+    <button type="submit">Salvar</button>
+</form>

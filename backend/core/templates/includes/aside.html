@@ -1,8 +1,8 @@
 <!-- includes/aside.html -->
 <aside id="sidebar" class="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
-  <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
+  <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-gray-800 pt-0">
     <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-      <div class="flex-1 px-3 bg-white divide-y space-y-1">
+      <div class="flex-1 px-3 bg-gray-800 divide-y space-y-1">
         <ul class="space-y-2 pb-2">
           <li>
             <form action="#" method="GET" class="lg:hidden">
@@ -11,226 +11,635 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 </div>
-                <input type="text" name="email" id="mobile-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search">
+                <input type="text" name="email" id="mobile-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Busca">
               </div>
             </form>
           </li>
-            <!--                            Frente de caixa                                  -->
-            <li x-data="{ open: false }" class="relative">
-              <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                <!-- Ícone do menu -->
-                <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" clip-rule="evenodd"></path>
+            <!-- Frente de Caixa -->
+          <li x-data="{ open: false, isActive: window.location.pathname.includes('/frente_de_caixa/') }" class="relative">
+            <a href="#" 
+              @click.prevent="open = !open" 
+              class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+              :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+              <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+              :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+              fill="currentColor" 
+              viewBox="0 0 20 20" 
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="ml-3">Frente de caixa</span>
-                <span class="caret"></span>
+                  <span class="ml-3 flex-grow">Frente de caixa</span>
+                  <svg :class="{'rotate-90': open}" 
+                    class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
-          
-              <!-- Menu Dropdown -->
-              <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-                <li><a href="{% url 'frente_de_caixa:caixas' %}" class="block px-4 py-2 text-gray-700">Caixas</a></li>
-                <li><a href="{% url 'frente_de_caixa:console' %}" class="block px-4 py-2 text-gray-700">Console</a></li>
+            <ul x-show="open" 
+            @click.away="open = false" 
+            class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+              <li>
+                <a href="{% url 'frente_de_caixa:caixas' %}" 
+                  class="block p-2 rounded transition"
+                  :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'frente_de_caixa:caixas' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'frente_de_caixa:caixas' %}'}">
+                  Caixas
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'frente_de_caixa:console' %}" 
+                class="block p-2 rounded transition"
+                :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'frente_de_caixa:console' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'frente_de_caixa:console' %}'}">
+                Console
+                </a>
+                </li>
               </ul>
-            </li>
-          
+          </li>
           <!--                    dashboard                                          -->
-          <li>
-            <a href="{% url 'core:dashboard' %}" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
-              <svg class="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+          <li x-data="{ isActive: window.location.pathname === '{% url "dashboard:dashboard" %}' }">
+            <a href="{% url 'dashboard:dashboard' %}" 
+               class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+               :class="{'bg-blue-700 text-white': isActive, 'text-gray-400 hover:bg-blue-700 hover:text-white': !isActive}">
+              <!-- Ícone do menu -->
+              <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+                   :class="isActive ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+                   fill="currentColor" 
+                   viewBox="0 0 20 20" 
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+              </svg>
               <span class="ml-3">Dashboard</span>
             </a>
           </li>
-          <!--                         Gestão Financeira                                   -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Financeiro</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'financeiro:contas_a_pagar' %}" class="block px-4 py-2 text-gray-700">Contas à Pagar</a></li>
-              <li><a href="{% url 'financeiro:contas_a_receber' %}" class="block px-4 py-2 text-gray-700">Contas à Receber</a></li>
-              <li><a href="{% url 'financeiro:cadastros' %}" class="block px-4 py-2 text-gray-700">Cadastros</a></li>
-              <li><a href="{% url 'financeiro:contabilidade' %}" class="block px-4 py-2 text-gray-700">Contabilidade</a></li>
-            </ul>
-          </li>
-          <!--                            Drogaria                                   -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Drogaria</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'drogaria:orcamentos_index' %}" class="block px-4 py-2 text-gray-700">Orçamentos</a></li>
-              <li><a href="{% url 'drogaria:compras_index' %}" class="block px-4 py-2 text-gray-700">Compras</a></li>
-            </ul>
-          </li>
-        
-          <!--                           Manipulação                                    -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Manipulação</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'manipulacao:orcamentos_index' %}" class="block px-4 py-2 text-gray-700">Orçamentos</a></li>
-              <li><a href="{% url 'manipulacao:formulas_index' %}" class="block px-4 py-2 text-gray-700">Formulas</a></li>
-              <li><a href="{% url 'manipulacao:compras_index' %}" class="block px-4 py-2 text-gray-700">Compras</a></li>
-              <li><a href="{% url 'manipulacao:relatorios_index' %}" class="block px-4 py-2 text-gray-700">Relatórios</a></li>
-              <li><a href="{% url 'manipulacao:configuracoes_index' %}" class="block px-4 py-2 text-gray-700">Configurações</a></li>
-            </ul>
-          </li>
-           <!--                         SNGPC                                      -->
-          <li>
-          <a href="{% url 'sngpc:sngpc' %}" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-            <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" clip-rule="evenodd"/></svg></path>
-              <span class="ml-3 flex-1 whitespace-nowrap">SNGPC</span>
-            </a>
-          </li>
-          <!--                         Entregas                                     -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Entregas</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'entregas:delivery_index' %}" class="block px-4 py-2 text-gray-700">Gestão</a></li>
-              <li><a href="{% url 'entregas:consultas_index' %}" class="block px-4 py-2 text-gray-700">Consultas</a></li>
-            </ul>
-          </li>
-          <!--                         Gestão de Estoque                                    -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Gestão de Estoque</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'gestao_estoque:entradas_index' %}" class="block px-4 py-2 text-gray-700">Entradas</a></li>
-              <li><a href="{% url 'gestao_estoque:saidas_index' %}" class="block px-4 py-2 text-gray-700">Saídas</a></li>
-              <li><a href="{% url 'gestao_estoque:inventario_index' %}" class="block px-4 py-2 text-gray-700">Inventário</a></li>
-            </ul>
-          </li>
-          <!--                         APPS                                    -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Aplicativos</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'todo:todo_list' %}" class="block px-4 py-2 text-gray-700">Tarefas</a></li>
-              <li><a href="{% url 'todo:todo_list' %}" class="block px-4 py-2 text-gray-700">Anotações</a></li>
-              <li><a href="{% url 'gestor:file_manager' %}" class="block px-4 py-2 text-gray-700">Arquivos</a></li>
-            </ul>
-          </li>
-          <!--                         Notas fiscais                                  -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Notas Fiscais</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'notas_fiscais:nfe_create' %}" class="block px-4 py-2 text-gray-700">NFE</a></li>
-              <li><a href="{% url 'notas_fiscais:nfse_create' %}" class="block px-4 py-2 text-gray-700">NFse</a></li>
-              <li><a href="{% url 'notas_fiscais:configuracoes' %}" class="block px-4 py-2 text-gray-700">Configurações</a></li>
-            </ul>
-          </li>
-          <!--                             Produtos site                                  -->
-          <li>
-            <a href="{% url 'product:product_list' %}" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
-              <span class="ml-3 flex-1 whitespace-nowrap">Produtos</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'todo:todo_list' %}" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
-              <span class="ml-3">Tarefas</span>
-            </a>
-          </li>
-          <li>
-            <a href="" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
-              <span class="ml-3 flex-1 whitespace-nowrap">Login</span>
-            </a>
-          </li>
-          <li>
-            <a href="" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
-              <span class="ml-3 flex-1 whitespace-nowrap">Cadastre-se</span>
-            </a>
-             <!--                     Usuários                                          -->
-          <li>
-            <a href="{% url 'user_list' %}" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-              <span class="ml-3">Ecommerce</span>
-            </a>
-          </li>
-          </li>
-          <!--                         Gestão Financeira                                   -->
-          <li x-data="{ open: false }" class="relative">
-            <a href="#" @click="open = !open" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-              <!-- Ícone do menu -->
-              <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" clip-rule="evenodd"></path>
-              </svg>
-              <span class="ml-3">Cadastros</span>
-              <span class="caret"></span>
-            </a>
-        
-            <!-- Menu Dropdown -->
-            <ul x-show="open" @click.away="open = false" class="block left-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-              <li><a href="{% url 'cadastros:cliente_list' %}" class="block px-4 py-2 text-gray-700">Clientes</a></li>
-              <li><a href="{% url 'cadastros:convenio_list' %}" class="block px-4 py-2 text-gray-700">Convênios</a></li>
-              <li><a href="{% url 'cadastros:fornecedor_list' %}" class="block px-4 py-2 text-gray-700">Fornecedores</a></li>
-              <li><a href="{% url 'cadastros:representante_list' %}" class="block px-4 py-2 text-gray-700">Representantes</a></li>
-            </ul>
-          </li>
-        </ul>
+
+<!-- Financeiro-->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/financeiro/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Financeiro</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'financeiro:contas_a_pagar' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'financeiro:contas_a_pagar' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'financeiro:contas_a_pagar' %}'}">
+        Contas á Pagar
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'financeiro:contas_a_receber' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'financeiro:contas_a_receber' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'financeiro:contas_a_receber' %}'}">
+        Contas á Receber
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'financeiro:cadastros' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'financeiro:cadastros' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'financeiro:cadastros' %}'}">
+        Cadastros
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'financeiro:contabilidade' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'financeiro:contabilidade' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'financeiro:contabilidade' %}'}">
+        Contabilidade
+      </a>
+    </li>
+  </ul>
+</li>
+
+
+<!-- Drogaria -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/drogaria/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm11 1H6v8l4-2 4 2V6z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Drogaria</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'drogaria:orcamentos_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'drogaria:orcamentos_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'drogaria:orcamentos_index' %}'}">
+        Orçamentos
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'drogaria:compras_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'drogaria:compras_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'drogaria:compras_index' %}'}">
+        Compras
+      </a>
+    </li>
+  </ul>
+</li>
+<!-- Manipulação -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/manipulacao/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Manipulação</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'manipulacao:orcamentos_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'manipulacao:orcamentos_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'manipulacao:orcamentos_index' %}'}">
+        Orçamentos
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'manipulacao:formulas_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'manipulacao:formulas_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'manipulacao:formulas_index' %}'}">
+        Formulas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'manipulacao:compras_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'manipulacao:compras_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'manipulacao:compras_index' %}'}">
+        Compras
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'manipulacao:relatorios_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'manipulacao:relatorios_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'manipulacao:relatorios_index' %}'}">
+        Relatórios
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'manipulacao:configuracoes_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'manipulacao:configuracoes_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'manipulacao:configuracoes_index' %}'}">
+        Configurações
+      </a>
+    </li>
+  </ul>
+</li>
+
+
+          <!-- Entregas -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/entregas/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+         <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+         <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+    </svg>
+    <span class="ml-3 flex-grow">Entregas</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'entregas:delivery_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'entregas:delivery_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'entregas:delivery_index' %}'}">
+        Gestão
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'entregas:consultas_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'entregas:consultas_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'entregas:consultas_index' %}'}">
+        Consultas
+      </a>
+    </li>
+  </ul>
+</li>
+
+          <!-- Gestão de estoque -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/gestao_estoque/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+    </svg>
+    <span class="ml-3 flex-grow">Gestão de Estoque</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'gestao_estoque:entradas_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'gestao_estoque:entradas_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'gestao_estoque:entradas_index' %}'}">
+        Entradas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'gestao_estoque:saidas_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'gestao_estoque:saidas_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'gestao_estoque:saidas_index' %}'}">
+        Saídas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'gestao_estoque:inventario_index' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'gestao_estoque:inventario_index' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'gestao_estoque:inventario_index' %}'}">
+        Inventário
+      </a>
+    </li>
+  </ul>
+</li>
+
+          <!-- Aplicativos -->
+          <li x-data="{ 
+            open: false, 
+            isActive: window.location.pathname.includes('/tarefas/') || 
+                      window.location.pathname.includes('/postit/') || 
+                      window.location.pathname.includes('/gestor/') 
+          }" 
+         class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Aplicativos</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'tarefas:tarefas' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'tarefas:tarefas' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'tarefas:tarefas' %}'}">
+        Tarefas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'postit:postits' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'postit:postits' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'postit:postits' %}'}">
+        Anotações
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'gestor:file_manager' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'gestor:file_manager' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'gestor:file_manager' %}'}">
+        Arquivos
+      </a>
+    </li>
+  </ul>
+</li>
+
+         <!-- Nostas Fiscais -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/notas_fiscais/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Notas Fiscais</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'notas_fiscais:nfe_create' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'notas_fiscais:nfe_create' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'notas_fiscais:nfe_create' %}'}">
+        NFE
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'notas_fiscais:nfse_create' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'notas_fiscais:nfse_create' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'notas_fiscais:nfse_create' %}'}">
+        NFSe
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'notas_fiscais:configuracoes' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'notas_fiscais:configuracoes' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'notas_fiscais:configuracoes' %}'}">
+        Configurações
+      </a>
+    </li>
+  </ul>
+</li>
+<!--SNGPC-->
+<li x-data="{ isActive: window.location.pathname === '{% url "sngpc:sngpc_processar" %}' }">
+  <a href="{% url 'sngpc:listar_xml' %}" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive, 'text-gray-400 hover:bg-blue-700 hover:text-white': !isActive}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="isActive ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+         <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+    </svg>
+    <span class="ml-3">SNGPC</span>
+  </a>
+</li>
+             <!-- Ecommerce -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/ecommerce/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Ecommerce</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'ecommerce:listar_vendas' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'ecommerce:listar_vendas' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'ecommerce:listar_vendas' %}'}">
+        Vendas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'ecommerce:listar_paginas' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'ecommerce:listar_paginas' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'ecommerce:listar_paginas' %}'}">
+        Páginas
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'ecommerce:listar_promocoes' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'ecommerce:listar_promocoes' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'ecommerce:listar_promocoes' %}'}">
+        Promoções
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'ecommerce:listar_materiais' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'ecommerce:listar_materiais' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'ecommerce:listar_materiais' %}'}">
+        Materiais
+      </a>
+    </li>
+     <li>
+      <a href="{% url 'product:product_list' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'product:product_list' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'product:product_list' %}'}">
+        Produtos
+      </a>
+    </li>
+  </ul>
+</li>
+
+         <!-- Cadastros -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/cadastros/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
+    </svg>
+    <span class="ml-3 flex-grow">Cadastros</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'cadastros:cliente_list' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'cadastros:cliente_list' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'cadastros:cliente_list' %}'}">
+        Clientes
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'cadastros:convenio_list' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'cadastros:convenio_list' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'cadastros:convenio_list' %}'}">
+        Convênios
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'cadastros:fornecedor_list' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'cadastros:fornecedor_list' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'cadastros:fornecedor_list' %}'}">
+        Fornecedores
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'cadastros:representante_list' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'cadastros:representante_list' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'cadastros:representante_list' %}'}">
+        Representantes
+      </a>
+    </li>
+  </ul>
+</li>
+
+         <!-- Admin -->
+<li x-data="{ open: false, isActive: window.location.pathname.includes('/adminas/') }" class="relative">
+  <a href="#" 
+     @click.prevent="open = !open" 
+     class="text-base font-normal rounded-lg flex items-center p-2 group relative"
+     :class="{'bg-blue-700 text-white': isActive || open, 'text-gray-400 hover:bg-blue-700 hover:text-white': !(isActive || open)}">
+    <svg class="w-6 h-6 flex-shrink-0 transition duration-75" 
+         :class="(isActive || open) ? 'text-gray-100' : 'text-gray-400 group-hover:text-gray-100'" 
+         fill="currentColor" 
+         viewBox="0 0 20 20" 
+         xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+    </svg>
+    <span class="ml-3 flex-grow">Admin</span>
+    <svg :class="{'rotate-90': open}" 
+         class="absolute right-4 w-4 h-4 text-gray-400 transform transition-transform duration-200" 
+         fill="none" 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+  <ul x-show="open" 
+      @click.away="open = false" 
+      class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
+    <li>
+      <a href="{% url 'adminas:listar_usuarios' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'adminas:listar_usuarios' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'adminas:listar_usuarios' %}'}">
+        Usuários
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'adminas:listar_permissoes' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'adminas:listar_permissoes' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'adminas:listar_permissoes' %}'}">
+        Permissões
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'adminas:listar_backups' %}" 
+         class="block p-2 rounded transition"
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'adminas:listar_backups' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'adminas:listar_backups' %}'}">
+        Backups
+      </a>
+    </li>
+  </ul>
+</li>
+
         <div class="space-y-2 pt-2">
-        
+        <h8 class="text-gray-100">Saturnkemy 2024©</h8>
         </div>
       </div>
     </div>
   </div>
 </aside>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.store('menu', {
+    activeItem: '',
+    setActive(item) {
+      this.activeItem = item;
+    },
+  });
+});
+</script>

@@ -1,0 +1,18 @@
+<!-- templates/tarefas/editar_tarefa.html -->
+<h2>Editar Tarefa</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="titulo">Título</label>
+    <input type="text" name="titulo" value="{{ tarefa.titulo }}" required>
+    <label for="descricao">Descrição</label>
+    <textarea name="descricao">{{ tarefa.descricao }}</textarea>
+    <label for="status">Status</label>
+    <select name="status">
+        <option value="To Do" {% if tarefa.status == 'To Do' %}selected{% endif %}>To Do</option>
+        <option value="In Progress" {% if tarefa.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Done" {% if tarefa.status == 'Done' %}selected{% endif %}>Done</option>
+    </select>
+    <label for="data_limite">Data Limite</label>
+    <input type="date" name="data_limite" value="{{ tarefa.data_limite }}">
+    <button type="submit">Salvar</button>
+</form>

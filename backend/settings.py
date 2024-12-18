@@ -67,6 +67,11 @@ INSTALLED_APPS = [
     'backend.cadastros',
     'backend.gestor',
     'backend.frente_de_caixa',
+    'backend.ecommerce',
+    'backend.adminas',
+    'backend.tarefas',
+    'backend.postit',
+    'backend.dashboard',
 ]
 
 
@@ -102,6 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "backend.adminas.context_processors.dados_empresa",
             ],
         },
     },
@@ -166,7 +172,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirecionamento de login/logout
-LOGIN_REDIRECT_URL = 'core:dashboard'
+LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 LOGOUT_REDIRECT_URL = 'core:index'
 
 # Configuração do Django REST Framework

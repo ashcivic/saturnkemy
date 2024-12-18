@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resetar Senha</title>
+</head>
+<body>
+    <h1>Resetar Senha do Usuário</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nova_senha">Nova Senha:</label>
+        <input type="password" id="nova_senha" name="nova_senha" required>
+        <button type="submit">Resetar Senha</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Importar Dados da Empresa pelo CNPJ</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="cnpj">CNPJ:</label>
+    <input type="text" name="cnpj" id="cnpj" placeholder="XX.XXX.XXX/XXXX-XX" required>
+    <button type="submit" class="button">Buscar Dados</button>
+</form>
+{% if messages %}
+    <ul class="messagelist">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
