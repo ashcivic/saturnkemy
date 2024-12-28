@@ -1,0 +1,39 @@
+{% extends 'trello/base.html' %}
+{% block body %}
+<div class="container-fluid"></div>
+    <div class="row" id='task_list'>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">
+                <h4 class="card-title">Test Card</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Card Name
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Edit Card</button>
+                        <div class="collapse" id="collapseExample">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleTextarea">Description</label>
+                                    <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Due Date</label>
+                                    <input type="date" class="form-control" id="formGroupExampleInput">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send invitation</button>
+
+                            </form>
+                        </div>
+
+                    </li>
+
+
+                    <li class="list-group-item">Card Two</li>
+                </ul>
+                <button id="add_card_list_button" type="button" class="btn btn-primary">Add Card</button>
+                <button id="del_card_list_button" type="button" class="btn btn-primary">Delete Card</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

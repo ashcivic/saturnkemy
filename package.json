@@ -1,0 +1,6 @@
+{
+  "scripts":{"build": "npx tailwindcss -i backend/core/static/css/tailwind.css -o backend/core/static/css/app.css --watch"},
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -23,3 +23,12 @@ def delivery_index(request):
 @login_required
 def consultas_index(request):
     return render(request, "entregas/consultas/index.html")
+
+@login_required
+def entregas_view(request):
+    status_editaveis = ['Em separação', 'Aguardando Entregador', 'Entregue', 'Cancelado', 'Saiu para Entrega']
+    entregas = Delivery.objects.all()  
+    return render(request, 'drogaria/compras/compras_index.html', {
+        'delivery': Delivery,
+        'status_editaveis': status_editaveis,
+    })

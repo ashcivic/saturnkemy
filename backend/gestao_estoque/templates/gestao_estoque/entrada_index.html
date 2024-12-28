@@ -1,13 +1,59 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="container mt-4">
-  <h1>Configurações</h1>
-  <p>Gerencie os cadastros gerais para a manipulação.</p>
-  <ul class="list-group">
-    <li class="list-group-item"><a href="#">Cadastro de Produtos</a></li>
-    <li class="list-group-item"><a href="#">Cadastro de Textos para Rótulos</a></li>
-    <li class="list-group-item"><a href="#">Cadastro de Cápsulas</a></li>
-    <li class="list-group-item"><a href="#">Cadastro de Frascos</a></li>
-  </ul>
+<!-- START: header -->
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+      <div class="mb-4">
+        {% include "./includes/breadcrumb.html" %}
+        <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Entradas</h1>
+      </div>
+      <div class="sm:flex">
+        {% include "./includes/search.html" %}
+        <!-- START: Adicionar -->
+        <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
+          <a href="" data-modal-toggle="add-user-modal" class="w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+            <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+            Adicionar
+          </a> 
+          <a href="" class="w-1/2 text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+            <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
+            Exportar
+          </a>
+        </div>
+    </div>
+        <!-- END: Adicionar -->
+
+ <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <!-- Cadastro de Usuários -->
+    <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-4">Cadastro de produtos</h2>
+        <div class="space-y-2">
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Novo Medicamento</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Nova Matéria Prima</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Novo Produto</a>
+          </div>
+    </div>
+
+    <!-- Grupo -->
+    <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-4">Cadastro de Etiquetas</h2>
+        <div class="space-y-2">
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Cadastrar Tipos</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Cadastrar Textos</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Cadastro de Impressoras</a>
+        </div>
+    </div>
+
+    <!-- Cadastro da Empresa -->
+    <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-4">Cadastros Manipulação</h2>
+        <div class="space-y-2">
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Insumos</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">EPIs</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Equipamentos</a>
+            <a href="#" class="block w-full text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">itens variados</a>
+        </div>
+    </div> 
 </div>
 {% endblock %}

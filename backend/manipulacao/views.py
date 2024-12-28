@@ -97,3 +97,12 @@ def compras_index(request):
 # Relatórios
 def configuracoes_index(request):
     return render(request, "manipulacao/configuracoes/index.html", {"configuracoes": configuracoes_index})
+
+
+def formulas_view(request):
+    status_editaveis = ['Aberto', 'Aguardando Compra', 'Recebido Parcial']
+    Formula = Formula.objects.all()  # Ajuste conforme o modelo de compras
+    return render(request, 'drogaria/compras.html', {
+        'formula': Formula,
+        'status_editaveis': status_editaveis,
+    })

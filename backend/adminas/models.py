@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-# Modelo de Usuário
+
 class DadosEmpresa(models.Model):
     nome_fantasia = models.CharField(max_length=255)
     razao_social = models.CharField(max_length=255)
@@ -36,7 +36,6 @@ class DadosEmpresa(models.Model):
     def __str__(self):
         return self.nome_fantasia
     
-# Modelo de Usuário
 class Usuario(AbstractUser):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -70,7 +69,6 @@ class Usuario(AbstractUser):
     def __str__(self):
         return self.username
 
-# Modelo de Grupos Personalizados
 class Grupo(models.Model):
     nome = models.CharField(max_length=255)
     descricao = models.TextField(blank=True)
@@ -82,7 +80,6 @@ class Grupo(models.Model):
     def __str__(self):
         return self.nome
 
-# Permissões para Usuários
 class UserPermission(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
@@ -100,7 +97,6 @@ class UserPermission(models.Model):
     def __str__(self):
         return f"{self.user.username}: {self.app_label} - {self.codename}"
 
-# Permissões para Grupos
 class GroupPermission(models.Model):
     group = models.ForeignKey(
         Group, 
@@ -118,7 +114,6 @@ class GroupPermission(models.Model):
     def __str__(self):
         return f"{self.group.name}: {self.app_label} - {self.codename}"
 
-# Backups
 class Backup(models.Model):
     BACKUP_TYPES = [
         ('partial', _('Parcial')),
@@ -137,7 +132,6 @@ class Backup(models.Model):
     def __str__(self):
         return f"{self.get_type_display()} - {self.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
 
-# Atualizações do Sistema
 class SystemUpdate(models.Model):
     version = models.CharField(max_length=50, verbose_name=_('Versão'))
     release_date = models.DateField(verbose_name=_('Data de Lançamento'))

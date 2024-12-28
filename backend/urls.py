@@ -28,6 +28,8 @@ urlpatterns = [
     path('tarefas/', include('backend.tarefas.urls', namespace='tarefas')), # noqa E501
     path('postit/', include('backend.postit.urls', namespace='postit')), # noqa E501
     path('dashboard/', include('backend.dashboard.urls', namespace='dashboard')), # noqa E501
+    #path('trello/', include('backend.trello.urls', namespace='trello')), # noqa E501
+
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

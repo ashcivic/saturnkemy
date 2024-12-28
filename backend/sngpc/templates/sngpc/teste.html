@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Cadastro - SNGPC</title>
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            z-index: 1000;
+            width: 600px;
+        }
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-header h2 {
+            margin: 0;
+        }
+        .close-btn {
+            cursor: pointer;
+            color: red;
+            font-size: 20px;
+        }
+        .divider {
+            height: 2px;
+            background-color: gray;
+            margin: 10px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input {
+            width: 50%; /* Reduzindo a largura dos campos pela metade */
+            padding: 4px; /* Diminuindo o padding para campos menores */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .tab-button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #e9e9e9;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+            flex: 1; /* Para que as abas fiquem lado a lado */
+            text-align: center;
+        }
+        .tab-button.active {
+            background-color: #ccc;
+        }
+        .insert-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px; /* Diminuindo o padding do botão */
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 4px; /* Diminuindo o padding das células da tabela */
+            text-align: left;
+        }
+        .edit-btn, .delete-btn {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #FF5733;
+            color: white;
+        }
+        .save-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px; /* Diminuindo o padding do botão salvar */
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px; /* Espaço entre o dropdown e o botão salvar */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Novo Cadastro</h2>
+            <span class="close-btn" onclick="closePopup()">✖</span>
+        </div>
+        <div class="divider"></div>
+        
+        <div class="form-group">
+            <label for="tipo-envio">Tipo de Envio</label>
+            <select id="tipo-envio" onchange="showOptions()">
+                <option value="">Selecione</option>
+                <option value="inventario">Inventário</option>
+                <option value="saida-venda">Saída por Venda</option>
+                <option value="saida-transferencia">Saída por Transferência</option>
+                <option value="saida-perda">Saída por Perda</option>
+                <option value="entrada-compra">Entrada por Compra</option>
+                <option value="entrada-transferencia">Entrada por Transferência</option>
+            </select>
+        </div>
+
+        <div id="additional-options" style="display: none;">
+            <div class="form-group">
+                <label for="cadastro">Cadastro</label>
+                <div style="display: flex; align-items: center;">
+                    <select id="cadastro" onchange="showTabs()">
+                        <option value="">Selecione</option>
+                        <option value="manual">Manual</option>
+                        <option value="automatico">Automático</option>
+                    </select>
+                    <button class="save-btn" onclick="saveData()">Salvar</button> <!-- Botão Salvar ao lado do dropdown -->
+                </div>
+            </div>
+            <div id="manual-options" class="tab">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showTab('receituario')">Receituário</button>
+                    <button class="tab-button" onclick="showTab('comprador')">Comprador</button>
+                    <button class="tab-button" onclick="showTab('paciente')">Paciente</button>
+                    <button class="tab-button" onclick="showTab('itens')">Itens</button>
+                </div>
+                <div id="receituario" class="tab active">
+                    <h3>Receituário</h3>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <input type="text" id="tipo">
+                    </div>
+                    <div class="form-group">
+                        <label for="num-notificacao">Nº Notif.</label>
+                        <input type="text" id="num-notificacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="data-prescricao">Data Presc.</label>
+                        <input type="date" id="data-prescricao">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-uso">Tipo de Uso</label>
+                        <input type="text" id="tipo-uso">
+                    </div>
+                    <div class="form-group">
+                        <label for="prescritor">Prescritor</label>
+                        <input type="text" id="prescritor">
+                    </div>
+                    <div class="form-group">
+                        <label for="doc-prescritor">Doc nº</label>
+                        <input type="text" id="doc-prescritor">
+                    </div>
+                    <button class="insert-btn" onclick="insertReceituario()">Inserir</button>
+                    <table class="table" id="receituario-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Nº Notif.</th>
+                                <th>Data Presc.</th>
+                                <th>Tipo de Uso</th>
+                                <th>Prescritor</th>
+                                <th>Doc nº</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <!-- Similar estrutura para as outras abas: comprador, paciente, itens -->
+            </div>
+            <div id="automatico-options" class="tab">
+                <h3>Importar Vendas</h3>
+                <div class="form-group">
+                    <label for="data-ultimo-envio">Data do Último Envio</label>
+                    <input type="date" id="data-ultimo-envio">
+                </div>
+                <div class="form-group">
+                    <label>Período a Considerar</label>
+                    <div>
+                        <label for="data-de">De:</label>
+                        <input type="date" id="data-de">
+                        <label for="data-ate">À:</label>
+                        <input type="date" id="data-ate">
+                    </div>
+                </div>
+                <table class="table" id="vendas-table">
+                    <thead>
+                        <tr>
+                            <th>Medicamento</th>
+                            <th>Data</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.querySelector('.popup').style.display = 'none';
+        }
+
+        function showOptions() {
+            const tipoEnvio = document.getElementById('tipo-envio').value;
+            const additionalOptions = document.getElementById('additional-options');
+            additionalOptions.style.display = tipoEnvio ? 'block' : 'none';
+        }
+
+        function showTabs() {
+            const cadastro = document.getElementById('cadastro').value;
+            const manualOptions = document.getElementById('manual-options');
+            const automaticoOptions = document.getElementById('automatico-options');
+            manualOptions.style.display = cadastro === 'manual' ? 'block' : 'none';
+            automaticoOptions.style.display = cadastro === 'automatico' ? 'block' : 'none';
+        }
+
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function insertReceituario() {
+            const tipo = document.getElementById('tipo').value;
+            const numNotificacao = document.getElementById('num-notificacao').value;
+            const dataPrescricao = document.getElementById('data-prescricao').value;
+            const tipoUso = document.getElementById('tipo-uso').value;
+            const prescritor = document.getElementById('prescritor').value;
+            const docPrescritor = document.getElementById('doc-prescritor').value;
+
+            const tableBody = document.getElementById('receituario-table').querySelector('tbody');
+            const newRow = tableBody.insertRow();
+            newRow.innerHTML = `
+                <td>${tipo}</td>
+                <td>${numNotificacao}</td>
+                <td>${dataPrescricao}</td>
+                <td>${tipoUso}</td>
+                <td>${prescritor}</td>
+                <td>${docPrescritor}</td>
+                <td>
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn" onclick="deleteRow(this)">Apagar</button>
+                </td>
+            `;
+        }
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.parentNode.removeChild(row);
+        }
+
+        function saveData() {
+            // Lógica para salvar os dados
+            alert('Dados salvos com sucesso!');
+        }
+    </script>
+</body>
+</html>

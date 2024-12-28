@@ -603,9 +603,9 @@
       @click.away="open = false" 
       class="block left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg p-2">
     <li>
-      <a href="{% url 'adminas:listar_usuarios' %}" 
+      <a href="{% url 'adminas:pag_gest' %}" 
          class="block p-2 rounded transition"
-         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'adminas:listar_usuarios' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'adminas:listar_usuarios' %}'}">
+         :class="{'bg-gray-100 text-gray-800': window.location.pathname === '{% url 'adminas:pag_gest' %}', 'text-gray-400 hover:bg-gray-100 hover:text-gray-800': window.location.pathname !== '{% url 'adminas:pag_gest' %}'}">
         Usuários
       </a>
     </li>

@@ -1,0 +1,42 @@
+.navigation {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+}
+
+#logo {
+  align-self: center;
+}
+
+#welcome, #log {
+  padding-left: 10px;
+}
+
+#registration, #login {
+text-align: center;
+padding: inherit;
+}
+
+.card {
+  border-color: transparent;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #2C3E50
+}
+
+body {
+  padding-top: 70px;
+  position: relative;
+  background-image: url('../images/vault_boy.png');
+  background-blend-mode: luminosity;
+  background-repeat: no-repeat;
+  background-attachment: fixed;;
+  background-position: center;
+  background-color: #026AA7;
+  margin: 25px;
+}
+
+button {
+    margin: 5px;
+}

@@ -149,3 +149,13 @@ def lancar_entrada(request):
         # Implementar lógica de registro da nota fiscal
         pass
     return render(request, 'drogaria/compras/form_entrada.html')
+
+# views.py
+def compras_view(request):
+    status_editaveis = ['Aberto', 'Aguardando Compra', 'Recebido Parcial']
+    compras = Pedido.objects.all()  # Ajuste conforme o modelo de compras
+    return render(request, 'drogaria/compras/compras_index.html', {
+        'compras': compras,
+        'status_editaveis': status_editaveis,
+    })
+

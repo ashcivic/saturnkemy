@@ -4,7 +4,7 @@ from . import views
 app_name='adminas'
 
 urlpatterns = [
-    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('usuarios/', views.pag_gest, name='pag_gest'),
     path('adicionar/', views.adicionar_usuarios, name='adicionar_usuarios'),
     path('usuarios/<int:user_id>/editar/', views.editar_usuario, name='editar_usuario'),
     path('desativar/<int:id>/', views.desativar_usuario, name='desativar_usuario'),

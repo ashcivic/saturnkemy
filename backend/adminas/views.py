@@ -19,6 +19,14 @@ def listar_usuarios(request):
     usuarios = Usuario.objects.all()
     return render(request, 'adminas/usuarios.html', {'usuarios': usuarios})
 
+@login_required
+@user_passes_test(is_admin)
+def pag_gest(request):
+    """
+    View para exibir a página inicial do app admin.
+    """
+    return render(request, "adminas/pag_gest.html")
+
 # Função de vista para adicionar usuários
 @login_required
 def adicionar_usuarios(request):

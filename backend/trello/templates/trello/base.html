@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/trello/css/style.css' %}" />
+    <title>Kanban</title>
+  </head>
+  <body>
+    <nav class="navigation navbar-default navbar-fixed-top" id="trello_navbar">
+      <div class="container-fluid">
+        <div class="navigation">
+          <a class="navbar-text navbar-left" id="logo" href="/">K+: Kanban Plus</a>
+          <ul class="navigation navbar-right" id='log'>
+            {% if user.is_authenticated %}
+              <li><a class="navbar-text navbar-left" href="/logout">Logout</a></li>
+            {% else %}
+              <li><a class="navbar-text navbar-left" href="/login">Login</a></li>
+            {% endif %}
+          </ul>
+          <ul class="navigation navbar-right" id='welcome'>
+            {% if user.is_authenticated %}
+              <li><p class="navbar-text">
+                Welcome, {{ user.username }}
+              </p></li>
+            {% else %}
+              <li><p class="navbar-text navbar-right" >
+                Oh Hello There, Please
+              </p></li>
+            {% endif %}
+          </ul>
+      </div> <!-- container fluid -->
+    </nav>
+    {% block body %}
+    {% endblock %}
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+    <script src="{% static '/trello/js/app.js' %}"></script>
+</html>
